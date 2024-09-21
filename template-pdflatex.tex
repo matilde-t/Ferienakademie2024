@@ -225,17 +225,59 @@
 		      \begin{figure}[!ht]
 			      \centering
 			      \includegraphics[width=.8\textwidth]{NMF.png}
-			      \caption{And example of NMF, using the same audio recording as in Figure \ref{fig:workflow}: \textbf{(a)} input spectogram $\boldsymbol{V}$, \textbf{(b)} approximated spectogram $\boldsymbol{DA}$, \textbf{(c)} dictionary $\boldsymbol{D}$, and \textbf{(d)} activation matrix $\boldsymbol{A}$. Source: \cite{Overview}.}
+			      \caption{And example of NMF, using the same audio recording as in Figure \ref{fig:workflow}: \textbf{(a)} input spectrogram $\boldsymbol{V}$, \textbf{(b)} approximated spectrogram $\boldsymbol{DA}$, \textbf{(c)} dictionary $\boldsymbol{D}$, and \textbf{(d)} activation matrix $\boldsymbol{A}$. Source: \cite{Overview}.}
 			      \label{fig:NMF}
 		      \end{figure}
 		      \framebreak
 		\item \emp{Neural Networks} (focus of this seminar)
-		
-		The most popular approach of this type is called \textbf{Onsets and Frames}, because it consists of two chained NNs. One detects note onset, and its outuput is used to inform a second network that focuses on perceiving the note lengths.
+
+
+
+		      \begin{columns}
+			      \begin{column}{0.4\textwidth}
+				      The most popular approach of this type is called \textbf{Onsets and Frames}, because it consists of two chained NNs. One detects \textit{note onset}, and its outuput is used to inform a second network that focuses on perceiving the \textit{note lengths}.
+			      \end{column}
+
+			      \begin{column}{0.6\textwidth}
+				      \begin{figure}[!ht]
+					      \centering
+					      \includegraphics[width=.7\textwidth]{OF.png}
+					      \caption{Source: \cite{OF}.}
+					      \label{fig:OF}
+				      \end{figure}
+			      \end{column}
+		      \end{columns}
+
 
 
 	\end{enumerate}
 
+	\framebreak
+
+	\begin{block}{Mel-Spectrogram}
+
+	\end{block}
+
+	\framebreak
+
+	\begin{figure}[!ht]
+		\centering
+		\includegraphics[width=.5\textwidth]{comparison.png}
+		\caption{Piano-roll representation of the first 6s of a recording of a Bach piece (BWV 582) for the organ. \textbf{(a)} is a NMF model, \textbf{(b)} is a NN model, both trained on the piano. Source: \cite{Overview}.}
+		\label{fig:comparison}
+	\end{figure}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%% AMT
+
+\section{Unaligned Supervision for AMT in the Wild}
+
+\subsection{Scheme}
+\begin{frame}
+	\frametitle{Scheme}
+
+	
 
 \end{frame}
 
@@ -269,15 +311,13 @@
 
 
 
-
-
 %%%%%%%%%%%%%%%%%%% Bibliography
-\begin{frame}[allowframebreaks]
-	\frametitle{Bibliography and Acknowledgements}
+\begin{frame}%[shrink=10]
+	\frametitle{Bibliography}
 
-	A special thanks to \emp{Abhirup Saha} for the slides on the topic.
+	% A special thanks to \emp{Abhirup Saha} for the slides on the topic.
 
-	\vspace{5mm}
+	% \vspace{5mm}
 
 	\bibliographystyle{alpha}
 	\begin{thebibliography}{BenetosMusicTranscription}
@@ -289,7 +329,7 @@
 		C. Hawthorne et al., “Onsets and Frames: Dual-Objective Piano Transcription,” International Symposium/Conference on Music Information Retrieval, pp. 50–57, Sep. 2018, doi: \url{https://doi.org/10.5281/zenodo.1492341}.
 
 		\bibitem[MamanUnalignedAMT]{AMT}
-		B. Maman and A. Bermano, “Unaligned Supervision for Automatic Music Transcription in-the-Wild.” Accessed: Sep. 19, 2024.
+		B. Maman and A. Bermano, “Unaligned Supervision for Automatic Music Transcription in-the-Wild.”
 
 	\end{thebibliography}
 \end{frame}
