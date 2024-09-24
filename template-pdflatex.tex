@@ -1,16 +1,16 @@
 \documentclass{beamer}
 
-% automatic section title page
-\AtBeginSection[]{
-  \begin{frame}
-  \vfill
-  \centering
-  \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
-    \usebeamerfont{title}\insertsectionhead\par%
-  \end{beamercolorbox}
-  \vfill
-  \end{frame}
-}
+% % automatic section title page
+% \AtBeginSection[]{
+%   \begin{frame}
+%   \vfill
+%   \centering
+%   \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+%     \usebeamerfont{title}\insertsectionhead\par%
+%   \end{beamercolorbox}
+%   \vfill
+%   \end{frame}
+% }
 
 \usepackage{concmath} 
 \usetheme{Boadilla}
@@ -112,8 +112,7 @@
 
 
 %%%%%%%%%%%%%%%%%%% Overview
-\section{Overview}
-\subsection{Definition}
+\section{Definition}
 \begin{frame}
 	\frametitle{Definition}
 	\begin{block}{}
@@ -131,39 +130,39 @@
 	\end{itemize}
 \end{frame}
 
-\subsection{Usual Workflow}
-\begin{frame}[shrink=10]
+\section{Usual Workflow}
+\begin{frame}[shrink=15]
 	\frametitle{Usual Workflow}
 
-	\begin{columns}
+	% \begin{columns}
 
-		\begin{column}{0.5\textwidth}
-			\begin{itemize}
-				\vspace{2mm}
-				\item \emp{(a)} audio waveform as input
-				      \vspace{2mm}
-				\item \emp{(b)} time-frequency representation
-				      \vspace{2mm}
-				\item \emp{(c)} piano-roll (MIDI: Musical Instrument Digital Interface) representation as output
-				      \vspace{2mm}
-				\item \emp{(d)} typeset music score
-			\end{itemize}
-		\end{column}
+	% 	\begin{column}{0.4\textwidth}
+	% 		\begin{itemize}
+	% 			\vspace{2mm}
+	% 			\item \emp{(a)} audio waveform as input
+	% 			      \vspace{2mm}
+	% 			\item \emp{(b)} time-frequency representation
+	% 			      \vspace{2mm}
+	% 			\item \emp{(c)} piano-roll (MIDI: Musical Instrument Digital Interface) representation as output
+	% 			      \vspace{2mm}
+	% 			\item \emp{(d)} typeset music score
+	% 		\end{itemize}
+	% 	\end{column}
 
-		\begin{column}{0.5\textwidth}
-			\begin{figure}[!ht]
-				\centering
-				\includegraphics[width=.7\textwidth]{workflow.png}
-				\caption{Source: \cite{Overview} (Images courtesy of the MIDI Aligned Piano Sound database).}
-				\label{fig:workflow}
-			\end{figure}
-		\end{column}
+	% 	\begin{column}{0.6\textwidth}
+	\begin{figure}[!ht]
+		\centering
+		\includegraphics[width=.4\textwidth]{workflow.png}
+		\caption{Source: \cite{Overview} (Images courtesy of the MIDI Aligned Piano Sound database).}
+		\label{fig:workflow}
+	\end{figure}
+	% 	\end{column}
 
-	\end{columns}
+	% \end{columns}
 \end{frame}
 
 
-% \subsection{Applications}
+% \section{Applications}
 % \begin{frame}
 % 	\frametitle{Applications\footnote{\cite{Overview}}}
 % 	\begin{itemize}
@@ -177,12 +176,12 @@
 % \end{frame}
 
 
-\subsection{AMT Approaches}
-\begin{frame}[shrink=10]
+\section{AMT Approaches}
+\begin{frame}[shrink=15]
 	\frametitle{AMT Approaches}
 
 	\begin{columns}
-		\begin{column}{0.5\textwidth}
+		\begin{column}{0.4\textwidth}
 			\begin{itemize}
 				\item \emp{(a)} \textbf{frame level} = estimation of the number of and pitch of notes that are simultaneously present in each time frame ($\sim 10ms$), independently in each \textit{time frame}
 				      \vspace{2mm}
@@ -192,10 +191,10 @@
 			\end{itemize}
 		\end{column}
 
-		\begin{column}{0.5\textwidth}
+		\begin{column}{0.6\textwidth}
 			\begin{figure}[!ht]
 				\centering
-				\includegraphics[width=.6\textwidth]{transcriptions.png}
+				\includegraphics[width=.55\textwidth]{transcriptions.png}
 				\caption{First phrase of J.S. Bach's chorale \textit{Ach Gott und Herr}. Source: \cite{Overview}.}
 				\label{fig:transcriptions}
 			\end{figure}
@@ -204,7 +203,7 @@
 
 \end{frame}
 
-\subsection{State of the Art}
+\section{State of the Art}
 \begin{frame}[allowframebreaks]
 	\frametitle{State of the Art}
 	% \begin{enumerate}
@@ -219,13 +218,17 @@
 	% 	      \label{fig:NMF}
 	%       \end{figure}
 	%       \framebreak
-	\emp{Neural Networks} %(focus of this seminar)
+	\emp{Onsets and Frames} %(focus of this seminar)
 
 
 
 	\begin{columns}
 		\begin{column}{0.4\textwidth}
-			The most popular approach of this type is called \textbf{Onsets and Frames}, because it consists of two chained NNs. One detects \textit{note onset}, and its outuput is used to inform a second network that focuses on perceiving the \textit{note lengths}.
+			Two chained \textbf{Neural Networks}:
+			\begin{enumerate}
+				\item detect \textit{note onset}
+				\item perceive \textit{note lengths} (frames)
+			\end{enumerate}
 		\end{column}
 
 		\begin{column}{0.6\textwidth}
@@ -249,8 +252,8 @@
 		is a perceptual scale of pitches judged by listeners to be equal in distance from one another.
 
 		\begin{itemize}
-			\item Reference point: 1000 mels = 1000 Hz tone, 40 dB above the listener's threshold.
-			\item Above about 500 Hz, increasingly large intervals are judged by listeners to produce equal pitch increments.
+			\item reference point: 1000 mels = 1000 Hz tone, 40 dB above the listener's threshold
+			\item above about 500 Hz, increasingly large intervals are judged by listeners to produce equal pitch increments
 		\end{itemize}
 
 
@@ -282,7 +285,7 @@
 
 \end{frame}
 
-\subsection{Key Challenges}
+\section{Key Challenges}
 \begin{frame}
 	\frametitle{Key Challenges\footnote{\cite{Overview}}}
 	\begin{enumerate}
@@ -312,22 +315,52 @@
 %%%%%%%%%%%%%%%%%%% AMT
 
 \section{Unaligned Supervision for AMT in the Wild}
-
-\subsection{Scheme}
-\begin{frame}
-	\frametitle{Scheme}
+\begin{frame}[allowframebreaks]
+	\frametitle{Unaligned Supervision for AMT in the Wild}
 
 	\begin{figure}[!ht]
 		\centering
-		\includegraphics[width=.2\textwidth]{AMT-general.png}
-	\end{figure}
-
-	\begin{figure}[!ht]
-		\centering
-		\includegraphics[width=.9\textwidth]{AMT-scheme.png}
-		\caption{Source: \cite{AMT}.}
+		\includegraphics[width=.2\textwidth]{AMT-general.png}%
+		\label{fig:AMT-general}
+		\includegraphics[width=.9\textwidth]{AMT-scheme.png}%
 		\label{fig:AMT-scheme}
+		\caption{Source: \cite{AMT}.}
 	\end{figure}
+
+	\framebreak
+
+	\emp{Dynamic Time Warping}
+
+	\begin{itemize}
+		\item algorithm for measuring \textbf{similarity} between two \textbf{temporal sequences}, which may vary in speed
+		\item \textbf{optimal match} between two given sequences with following rules:
+
+		      \begin{itemize}
+			      \item \textit{one or more} matches
+			      \item \textit{first index} must match with first index
+			      \item \textit{last index} must match with last index
+			      \item mapping of the indices must be \textit{monotonically increasing}
+		      \end{itemize}
+
+	\end{itemize}
+
+	\framebreak
+
+	\emp{Pitch Shift Augmentation}
+
+	\begin{itemize}
+		\item 11 additional pitch shifted copies of the data, with pitch shifts (in semitones):
+
+		      \begin{equation*}
+			      s_i = i + \alpha_i,\quad -5 \leq i \leq 5, \quad \alpha_i \sim \mathbf{U}(-0.1,0.1)
+		      \end{equation*}
+
+		\item labels computed only for original copy, then shifted accordingly
+		\item data augmentation
+		\item enforce consistency across pitch shift $\Rightarrow$ learn tonality
+	\end{itemize}
+
+	\href{https://benadar293.github.io/}{\textbf{Results}}
 
 \end{frame}
 
