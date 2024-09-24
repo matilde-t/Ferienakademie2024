@@ -17,6 +17,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{helvet}
 \usepackage[english]{babel}
+\usepackage{hyperref}
 
 \usepackage{natbib} % for the bibliography
 % \setcitestyle{numbers}
@@ -82,11 +83,18 @@
 \subtitle{Overview, Onsets and Frames, Unaligned Supervision}
 
 \author{Matilde Tozzi}
-\institute[]{Ferienakademie 2024}
+\institute[]{Ferienakademie}
 \date[September 2024]{September 2024}
 
 \newcommand{\emp}[1]{\textcolor{tum}{\textbf{#1}}}
 \graphicspath{{.}{./Pictures/}}
+
+\hypersetup{
+  colorlinks   = true, %Colours links instead of ugly boxes
+  urlcolor     = tum-darker, %Colour for external hyperlinks
+  linkcolor    = black, %Colour of internal links
+  citecolor   = black %Colour of citations
+}
 
 \begin{document}
 \beamertemplatenavigationsymbolsempty
@@ -168,24 +176,6 @@
 % 	\end{itemize}
 % \end{frame}
 
-\subsection{Key Challenges}
-\begin{frame}
-	\frametitle{Key Challenges\footnote{\cite{Overview}}}
-	\begin{enumerate}
-		\item multiple simultaneous sources
-		\item harmonic relations in overlapping sounds
-		      \begin{itemize}
-			      \item C major chord, fundamental frequency ratio C:E:G 4:5:6
-			      \item harmonic overlap 46.7\%, 33.3\%, 60\% for C, E, and G respectively
-		      \end{itemize}
-		\item high synchronization of onsets and offsets between different voices $\Rightarrow$ no statistical independence between sources
-		\item annotation is very time consuming and requires high expertise
-		      \begin{itemize}
-			      \item sheet music is not a good ground-truth: not time-aligned, not an accurate performance representation
-		      \end{itemize}
-	\end{enumerate}
-
-\end{frame}
 
 \subsection{AMT Approaches}
 \begin{frame}[shrink=10]
@@ -217,55 +207,107 @@
 \subsection{State of the Art}
 \begin{frame}[allowframebreaks]
 	\frametitle{State of the Art}
-	\begin{enumerate}
-		\item \emp{Negative Matrix Factorization} (not covered in this seminar)
+	% \begin{enumerate}
+	% \item \emp{Negative Matrix Factorization} (not covered in this seminar)
 
-		      Represent a given nonnegative time-frequency representation $\boldsymbol{V}\in\mathbb{R}_{\geq0}^{MxN}$ as a product of two nonnegative matrices: a \textbf{dictionary} $\boldsymbol{D}\in\mathbb{R}_{\geq0}^{MxK}$ and an \textbf{activation matrix} $\boldsymbol{A}\in\mathbb{R}_{\geq0}^{KxN}$. The goal is to minimize a distance (or divergence) between $\boldsymbol{V}$ and $\boldsymbol{DA}$ w.r.t. $\boldsymbol{D}$ and $\boldsymbol{A}$.
-		      \framebreak
-		      \begin{figure}[!ht]
-			      \centering
-			      \includegraphics[width=.8\textwidth]{NMF.png}
-			      \caption{And example of NMF, using the same audio recording as in Figure \ref{fig:workflow}: \textbf{(a)} input spectrogram $\boldsymbol{V}$, \textbf{(b)} approximated spectrogram $\boldsymbol{DA}$, \textbf{(c)} dictionary $\boldsymbol{D}$, and \textbf{(d)} activation matrix $\boldsymbol{A}$. Source: \cite{Overview}.}
-			      \label{fig:NMF}
-		      \end{figure}
-		      \framebreak
-		\item \emp{Neural Networks} (focus of this seminar)
-
-
-
-		      \begin{columns}
-			      \begin{column}{0.4\textwidth}
-				      The most popular approach of this type is called \textbf{Onsets and Frames}, because it consists of two chained NNs. One detects \textit{note onset}, and its outuput is used to inform a second network that focuses on perceiving the \textit{note lengths}.
-			      \end{column}
-
-			      \begin{column}{0.6\textwidth}
-				      \begin{figure}[!ht]
-					      \centering
-					      \includegraphics[width=.7\textwidth]{OF.png}
-					      \caption{Source: \cite{OF}.}
-					      \label{fig:OF}
-				      \end{figure}
-			      \end{column}
-		      \end{columns}
+	%       Represent a given nonnegative time-frequency representation $\boldsymbol{V}\in\mathbb{R}_{\geq0}^{MxN}$ as a product of two nonnegative matrices: a \textbf{dictionary} $\boldsymbol{D}\in\mathbb{R}_{\geq0}^{MxK}$ and an \textbf{activation matrix} $\boldsymbol{A}\in\mathbb{R}_{\geq0}^{KxN}$. The goal is to minimize a distance (or divergence) between $\boldsymbol{V}$ and $\boldsymbol{DA}$ w.r.t. $\boldsymbol{D}$ and $\boldsymbol{A}$.
+	%       \framebreak
+	%       \begin{figure}[!ht]
+	% 	      \centering
+	% 	      \includegraphics[width=.8\textwidth]{NMF.png}
+	% 	      \caption{And example of NMF, using the same audio recording as in Figure \ref{fig:workflow}: \textbf{(a)} input spectrogram $\boldsymbol{V}$, \textbf{(b)} approximated spectrogram $\boldsymbol{DA}$, \textbf{(c)} dictionary $\boldsymbol{D}$, and \textbf{(d)} activation matrix $\boldsymbol{A}$. Source: \cite{Overview}.}
+	% 	      \label{fig:NMF}
+	%       \end{figure}
+	%       \framebreak
+	\emp{Neural Networks} %(focus of this seminar)
 
 
 
-	\end{enumerate}
+	\begin{columns}
+		\begin{column}{0.4\textwidth}
+			The most popular approach of this type is called \textbf{Onsets and Frames}, because it consists of two chained NNs. One detects \textit{note onset}, and its outuput is used to inform a second network that focuses on perceiving the \textit{note lengths}.
+		\end{column}
+
+		\begin{column}{0.6\textwidth}
+			\begin{figure}[!ht]
+				\centering
+				\includegraphics[width=.7\textwidth]{OF.png}
+				\caption{Source: \cite{OF}.}
+				\label{fig:OF}
+			\end{figure}
+		\end{column}
+	\end{columns}
+
+
+
+	% \end{enumerate}
 
 	\framebreak
 
 	\begin{block}{Mel-Spectrogram}
+		The \emp{mel scale} (after the word \textit{melody})
+		is a perceptual scale of pitches judged by listeners to be equal in distance from one another.
+
+		\begin{itemize}
+			\item Reference point: 1000 mels = 1000 Hz tone, 40 dB above the listener's threshold.
+			\item Above about 500 Hz, increasingly large intervals are judged by listeners to produce equal pitch increments.
+		\end{itemize}
+
+
 
 	\end{block}
 
 	\framebreak
 
+	\begin{equation*}
+		m = 2595\log_{10}\left(1+\frac{f}{700}\right)
+	\end{equation*}
+
 	\begin{figure}[!ht]
 		\centering
-		\includegraphics[width=.5\textwidth]{comparison.png}
-		\caption{Piano-roll representation of the first 6s of a recording of a Bach piece (BWV 582) for the organ. \textbf{(a)} is a NMF model, \textbf{(b)} is a NN model, both trained on the piano. Source: \cite{Overview}.}
-		\label{fig:comparison}
+		\includegraphics[width=.9\textwidth]{Mel-Hz_plot.png}
+		\caption{Relation between Hertz and Mel scales. Source: \cite{MEL}.}
+		\label{fig:mel}
 	\end{figure}
+
+
+	% \framebreak
+
+	% \begin{figure}[!ht]
+	% 	\centering
+	% 	\includegraphics[width=.5\textwidth]{comparison.png}
+	% 	\caption{Piano-roll representation of the first 6s of a recording of a Bach piece (BWV 582) for the organ. \textbf{(a)} is a NMF model, \textbf{(b)} is a NN model, both trained on the piano. Source: \cite{Overview}.}
+	% 	\label{fig:comparison}
+	% \end{figure}
+
+\end{frame}
+
+\subsection{Key Challenges}
+\begin{frame}
+	\frametitle{Key Challenges\footnote{\cite{Overview}}}
+	\begin{enumerate}
+		\item multiple simultaneous sources
+		\item harmonic relations in overlapping sounds
+		      \begin{itemize}
+			      \item C major chord, fundamental frequency ratio C:E:G 4:5:6
+			      \item harmonic overlap 46.7\%, 33.3\%, 60\% for C, E, and G respectively
+		      \end{itemize}
+		\item high synchronization of onsets and offsets between different voices $\Rightarrow$ no statistical independence between sources
+		\item annotation is very time consuming and requires high expertise
+		      \begin{itemize}
+			      \item sheet music is not a good ground-truth: not time-aligned, not an accurate performance representation
+		      \end{itemize}
+	\end{enumerate}
+
+	\emp{Examples of metric limitations for Osets and Frames\footnote{\cite{OF}}}
+
+	\href{https://storage.googleapis.com/magentadata/papers/onsets-frames/fur_elise_framescore_good2.mp3}{Original Score}
+
+	\href{https://storage.googleapis.com/magentadata/papers/onsets-frames/fur_elise_framescore_bad3.mp3}{Many 1-frame notes added}
+
+	\href{https://storage.googleapis.com/magentadata/papers/onsets-frames/fur_elise_notejitter_score1.mp3}{Note timing jittered, but still within tolerance}
+
+
 
 \end{frame}
 
@@ -277,7 +319,7 @@
 \begin{frame}
 	\frametitle{Scheme}
 
-	
+
 
 \end{frame}
 
@@ -312,7 +354,7 @@
 
 
 %%%%%%%%%%%%%%%%%%% Bibliography
-\begin{frame}%[shrink=10]
+\begin{frame}[shrink=5]
 	\frametitle{Bibliography}
 
 	% A special thanks to \emp{Abhirup Saha} for the slides on the topic.
@@ -330,6 +372,9 @@
 
 		\bibitem[MamanUnalignedAMT]{AMT}
 		B. Maman and A. Bermano, “Unaligned Supervision for Automatic Music Transcription in-the-Wild.”
+
+		\bibitem[MelScale]{MEL}
+		\url{https://en.wikipedia.org/wiki/Mel_scale}
 
 	\end{thebibliography}
 \end{frame}
