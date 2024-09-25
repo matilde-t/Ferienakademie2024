@@ -89,12 +89,12 @@
 \newcommand{\emp}[1]{\textcolor{tum}{\textbf{#1}}}
 \graphicspath{{.}{./Pictures/}}
 
-\hypersetup{
-  colorlinks   = true, %Colours links instead of ugly boxes
-  urlcolor     = tum-darker, %Colour for external hyperlinks
-  linkcolor    = tum, %Colour of internal links
-  citecolor   = black %Colour of citations
-}
+% \hypersetup{
+%   colorlinks   = true, %Colours links instead of ugly boxes
+%   urlcolor     = tum-darker, %Colour for external hyperlinks
+% %   linkcolor    = white, %Colour of internal links
+%   citecolor   = black %Colour of citations
+% }
 
 \begin{document}
 \beamertemplatenavigationsymbolsempty
@@ -104,11 +104,11 @@
 	\titlepage
 \end{frame}
 
-% 2. Slide: TOC
-\begin{frame}
-	\frametitle{Table of contents}
-	\tableofcontents
-\end{frame}
+% % 2. Slide: TOC
+% \begin{frame}
+% 	\frametitle{Table of contents}
+% 	\tableofcontents
+% \end{frame}
 
 
 %%%%%%%%%%%%%%%%%%% Overview
@@ -116,17 +116,17 @@
 \begin{frame}
 	\frametitle{Definition}
 	\begin{block}{}
-		\emp{Automatic Music Transcription (AMT)} is the design of computational algorithms to convert acoustic music signals into some form of music notation. \cite{Overview}
+		\emp{Automatic Music Transcription (AMT)} is the design of \textbf{computational algorithms} to convert acoustic \textbf{music signals} into some form of \textbf{music notation}. \cite{Overview}
 	\end{block}
+
+	\vspace{5mm}
 
 	\emp{Subtasks}:
 	\begin{itemize}
-		\item multipitch estimation
-		\item onset and offset detection
-		\item instrument recognition
-		\item beat and rhythm tracking
-		\item dynamics
-		\item score typesetting
+		\item note \textit{onset} and \textit{offset} detection
+		\item \textit{instrument} recognition
+		\item \textit{beat} and \textit{rhythm} tracking
+		\item \dots
 	\end{itemize}
 \end{frame}
 
@@ -183,11 +183,11 @@
 	\begin{columns}
 		\begin{column}{0.4\textwidth}
 			\begin{itemize}
-				\item \emp{(a)} \textbf{frame level} = estimation of the number of and pitch of notes that are simultaneously present in each time frame ($\sim 10ms$), independently in each \textit{time frame}
+				\item \emp{(a)} \textbf{frame level} = estimate the number and pitch of notes that are simultaneously present in each \textit{time frame} ($\sim$10ms), independently in each one
 				      \vspace{2mm}
-				\item \emp{(b)} \textbf{note level} = connects pitch estimates over time into \textit{notes} (pitch, onset time, offset time)
+				\item \emp{(b)} \textbf{note level} = connect pitch estimates over time into \textit{notes} (pitch, onset time, offset time)
 				      \vspace{2mm}
-				\item \emp{(c)} \textbf{stream level} (multipitch streaming) = grouping of estimated pitches or notes into \textit{streams} (one instrument or musical voice)
+				\item \emp{(c)} \textbf{stream level (multipitch streaming)}  = group estimated pitches or notes into \textit{streams} (one instrument or musical voice)
 			\end{itemize}
 		\end{column}
 
@@ -247,31 +247,31 @@
 
 	\framebreak
 
-	\begin{block}{Mel-Spectrogram}
+	\begin{block}{Mel-Spectrogram}\footnotetext{\cite{MEL}}
 		The \emp{mel scale} (after the word \textit{melody})
-		is a perceptual scale of pitches judged by listeners to be equal in distance from one another.
+		is a \textbf{perceptual scale} of pitches judged by listeners to be equal in distance from one another.
 
 		\begin{itemize}
-			\item reference point: 1000 mels = 1000 Hz tone, 40 dB above the listener's threshold
-			\item above about 500 Hz, increasingly large intervals are judged by listeners to produce equal pitch increments
+			\item \textit{reference point}: 1000 mels = 1000 Hz tone, 40 dB above the listener's threshold
+			\item above about 500 Hz, \textit{increasingly large intervals} are judged by listeners to produce equal pitch increments
 		\end{itemize}
 
 
 
 	\end{block}
 
-	\framebreak
+	% \framebreak
 
-	\begin{equation*}
-		m = 2595\log_{10}\left(1+\frac{f}{700}\right)
-	\end{equation*}
+	% \begin{equation*}
+	% 	m = 2595\log_{10}\left(1+\frac{f}{700}\right)
+	% \end{equation*}
 
-	\begin{figure}[!ht]
-		\centering
-		\includegraphics[width=.9\textwidth]{Mel-Hz_plot.png}
-		\caption{Relation between Hertz and Mel scales. Source: \cite{MEL}.}
-		\label{fig:mel}
-	\end{figure}
+	% \begin{figure}[!ht]
+	% 	\centering
+	% 	\includegraphics[width=.9\textwidth]{Mel-Hz_plot.png}
+	% 	\caption{Relation between Hertz and Mel scales. Source: \cite{MEL}.}
+	% 	\label{fig:mel}
+	% \end{figure}
 
 
 	% \framebreak
@@ -289,26 +289,33 @@
 \begin{frame}
 	\frametitle{Key Challenges\footnote{\cite{Overview}}}
 	\begin{enumerate}
-		\item multiple simultaneous sources
-		\item harmonic relations in overlapping sounds
-		      \begin{itemize}
-			      \item C major chord, fundamental frequency ratio C:E:G 4:5:6
-			      \item harmonic overlap 46.7\%, 33.3\%, 60\% for C, E, and G respectively
-		      \end{itemize}
-		\item high synchronization of onsets and offsets between different voices $\Rightarrow$ no statistical independence between sources
-		\item annotation is very time consuming and requires high expertise
+		\item \textbf{harmonic relations} in overlapping sounds
+		      %   \begin{itemize}
+		      %       \item C major chord, fundamental frequency ratio C:E:G 4:5:6
+		      %       \item harmonic overlap 46.7\%, 33.3\%, 60\% for C, E, and G respectively
+		      %   \end{itemize}
+		\item \textbf{high synchronization} of onsets and offsets between different voices $\Rightarrow$ no statistical independence between sources
+		\item \textbf{annotation} is very time consuming and requires high expertise
 		      \begin{itemize}
 			      \item sheet music is not a good ground-truth: not time-aligned, not an accurate performance representation
 		      \end{itemize}
 	\end{enumerate}
 
-	\emp{Examples of metric limitations for Osets and Frames\footnote{\cite{OF}}}
+	\vspace{5mm}
 
-	\href{https://storage.googleapis.com/magentadata/papers/onsets-frames/fur_elise_framescore_good2.mp3}{Original Score}
+	\emp{Examples of metric limitations for Onsets and Frames\footnote{\cite{OF}}}
 
-	\href{https://storage.googleapis.com/magentadata/papers/onsets-frames/fur_elise_notejitter_score1.mp3}{Note timing jittered, but still within tolerance}
+	\vspace{1mm}
 
-	\href{https://storage.googleapis.com/magentadata/papers/onsets-frames/fur_elise_framescore_bad3.mp3}{Many 1-frame notes added}
+	\href{https://storage.googleapis.com/magentadata/papers/onsets-frames/fur_elise_framescore_good2.mp3}{\underline{Original Score}}
+
+	\vspace{2mm}
+
+	\href{https://storage.googleapis.com/magentadata/papers/onsets-frames/fur_elise_notejitter_score1.mp3}{\underline{Note timing jittered, but still within tolerance (50ms)}}
+
+	\vspace{2mm}
+
+	\href{https://storage.googleapis.com/magentadata/papers/onsets-frames/fur_elise_framescore_bad3.mp3}{\underline{Many 1-frame notes added}}
 
 \end{frame}
 
@@ -329,7 +336,7 @@
 
 	\framebreak
 
-	\emp{Dynamic Time Warping}
+	\emp{Dynamic Time Warping\footnote{\cite{DWT}}}
 
 	\begin{itemize}
 		\item algorithm for measuring \textbf{similarity} between two \textbf{temporal sequences}, which may vary in speed
@@ -349,7 +356,7 @@
 	\emp{Pitch Shift Augmentation}
 
 	\begin{itemize}
-		\item 11 additional pitch shifted copies of the data, with pitch shifts (in semitones):
+		\item 11 additional \textbf{pitch shifted copies} of the data, with pitch shifts (in semitones):
 
 		      \begin{equation*}
 			      s_i = i + \alpha_i,\quad -5 \leq i \leq 5, \quad \alpha_i \sim \mathbf{U}(-0.1,0.1)
@@ -357,10 +364,20 @@
 
 		\item labels computed only for original copy, then shifted accordingly
 		\item data augmentation
-		\item enforce consistency across pitch shift $\Rightarrow$ learn tonality
+		\item enforce consistency across pitch shift $\Rightarrow$ \textit{learn tonality}
 	\end{itemize}
 
-	\href{https://benadar293.github.io/}{\textbf{Results}}
+	\vspace{5mm}
+
+	\emp{Results}
+
+	\vspace{2mm}
+
+	\href{https://benadar293.github.io/}{\underline{Unaligned Supervision}}
+
+	\vspace{2mm}
+
+	\href{https://storage.googleapis.com/magentadata/papers/onsets-frames/index.html}{\underline{Onsets and Frames Results}}
 
 \end{frame}
 
@@ -395,7 +412,7 @@
 
 
 %%%%%%%%%%%%%%%%%%% Bibliography
-\begin{frame}[shrink=5]
+\begin{frame}[allowframebreaks]%[shrink=5]
 	\frametitle{Bibliography}
 
 	% A special thanks to \emp{Abhirup Saha} for the slides on the topic.
@@ -416,6 +433,9 @@
 
 		\bibitem[MelScale]{MEL}
 		\url{https://en.wikipedia.org/wiki/Mel_scale}
+
+		\bibitem[DynamicTimeWarping]{DWT}
+		\url{https://en.wikipedia.org/wiki/Dynamic_time_warping}
 
 	\end{thebibliography}
 \end{frame}
